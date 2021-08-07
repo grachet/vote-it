@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../services/authentication.service";
-
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -10,28 +10,55 @@ import { AuthenticationService } from "../services/authentication.service";
 
 export class LoginPage implements OnInit {
 
-  user_email = 'guillaume.rachet@gmail.com';
-  user_password = 'password';
+  validations_form: FormGroup;
+  errorMessage: string = '';
+
+  validation_messages = {
+    'email': [
+      { type: 'required', message: 'Email is required' },
+      { type: 'pattern', message: 'Invalid address' }
+    ],
+    'password': [
+      { type: 'required', message: 'Password is required' },
+      { type: 'minlength', message: 'The password must be at least 5 characters long. ' }
+    ]
+  };
 
   constructor(
     public authService: AuthenticationService,
+    private formBuilder: FormBuilder,
     public router: Router
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.validations_form = this.formBuilder.group({
+      email: new FormControl('guillaume.rachet@gmail.com', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
+      password: new FormControl('password', Validators.compose([
+        Validators.minLength(5),
+        Validators.required
+      ])),
+    });
+  }
 
-  logIn(email, password) {
-    this.authService.SignIn(email.value, password.value)
+  tryLogin(value) {
+    this.authService.SignIn(value.email, value.password)
       .then((res) => {
         if (this.authService.isEmailVerified) {
-          this.router.navigate(['message']);
+          this.router.navigate(['home']);
         } else {
-          window.alert('Email is not verified')
+          this.errorMessage = 'Email is not verified';
           return false;
         }
       }).catch((error) => {
-        window.alert(error.message)
+        this.errorMessage = error.message;
       })
+  }
+
+  goRegisterPage() {
+    this.router.navigate(['/registration']);
   }
 
 }
