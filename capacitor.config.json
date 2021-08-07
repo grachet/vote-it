@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "vote-it",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

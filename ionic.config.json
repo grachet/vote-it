@@ -1,0 +1,8 @@
+{
+  "name": "vote-it",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "bdba94b5"
+}
