@@ -1,20 +1,28 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Vot'it
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content class="auth-form">
-  <ion-grid>
-    <ion-row>
-      <ion-col class="ion-align-self-center">
-        <ion-button [routerLink]="['/registration']" expand="block" color="primary">Register</ion-button>
-        <span class="divider line one-line">or</span>
-        <span class="already">Already a user?</span>
-        <ion-button [routerLink]="['/login']" expand="block" color="secondary">Sign In</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
+  <ion-navbar>
+
+    <ion-title>
+      test
+      <!-- <img height="50px" src="assets/logo_votit_white.png"> -->
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only type="submit" (click)="authService.SignOut()">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-content class="auth-form">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-align-self-center">
+          <ion-button [routerLink]="['/registration']" expand="block" color="primary">Register</ion-button>
+          <span class="divider line one-line">or</span>
+          <span class="already">Already a user?</span>
+          <ion-button [routerLink]="['/login']" expand="block" color="secondary">Sign In</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
