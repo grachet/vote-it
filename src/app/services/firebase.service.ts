@@ -46,17 +46,18 @@ export class FirebaseService {
 
   createVote(value) {
     return new Promise<any>((resolve, reject) => {
-      let currentUser = firebase.auth().currentUser;
-      this.afs.collection('votes').add({
+      this.afs.collection('/votes').add({
         title: value.title,
         hashtag: value.hashtag,
         answers: {}
       })
         .then(
-          res => resolve(res),
+          (res) => {
+            resolve(res)
+          },
           err => reject(err)
-        );
-    });
+        )
+    })
   }
 
   // deleteVote(taskKey) {

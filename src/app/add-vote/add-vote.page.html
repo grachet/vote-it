@@ -1,9 +1,47 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>add-vote</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add vote subject</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="form-content" padding>
+  <div class="content">
+    <form (ngSubmit)="save(validations_form.value)" [formGroup]="validations_form" class="form">
+      <ion-item>
+        <ion-label color="primary" position="floating">Title</ion-label>
+        <ion-input formControlName="title" type="text"></ion-input>
+      </ion-item>
+      <div class="validation-errors input">
+        <ng-container *ngFor="let validation of validation_messages.title">
+          <div
+            *ngIf="validations_form.get('title').hasError(validation.type) && (validations_form.get('title').dirty || validations_form.get('title').touched)"
+            class="error-message">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
 
+      <ion-item>
+        <ion-label color="primary" position="floating">Hashtag</ion-label>
+        <ion-input formControlName="hashtag" type="hashtag"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.hashtag">
+          <div
+            *ngIf="validations_form.get('hashtag').hasError(validation.type) && (validations_form.get('hashtag').dirty || validations_form.get('hashtag').touched)"
+            class="error-message">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-button [disabled]="!validations_form.valid" class="submit-btn" expand="block" type="submit">Save
+      </ion-button>
+      <label class="error-message">{{errorMessage}}</label>
+      <label class="success-message">{{successMessage}}</label>
+    </form>
+  </div>
 </ion-content>
