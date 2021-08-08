@@ -1,6 +1,6 @@
 # Vot'It
 
-A Ionic 5 mobile application to manage votes by groups of users
+A Ionic 5 / angular / firebase mobile application to propose votes to all users.
 
 ### Playstore link
 
