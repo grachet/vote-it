@@ -8,21 +8,42 @@
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
       <ion-button (click)="authService.SignOut()" fill="clear">
-        <ion-icon slot="icon-only" name="home"></ion-icon>
+        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="auth-form">
-  <ion-grid>
-    <ion-row>
-      <ion-col class="ion-align-self-center">
-        <ion-button [routerLink]="['/registration']" expand="block" color="primary">Register</ion-button>
-        <span class="divider line one-line">or</span>
-        <span class="already">Already a user?</span>
-        <ion-button [routerLink]="['/login']" expand="block" color="secondary">Sign In</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content class="form-content">
+  <div class="content">
+    <h1>{{votes}}</h1>
+  </div>
+
+
+
+  <!-- <ion-content *ngIf="items" class="list-mini-content" padding> -->
+  <!-- <ion-text color="primary">
+    <h1>{{votes}}</h1>
+  </ion-text> -->
+
+  <!-- <ion-card *ngFor="let item of myGroups">
+    <ion-item [routerLink]="['/list-proposition/', item.id]" class="activated" color="light">
+      <ion-card-header color="light">
+        <ion-card-title>{{item.Name}}</ion-card-title>
+        <ion-card-subtitle>{{item.Description}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-item>
+    <ion-item [routerLink]="['/list-proposition', item.id]" class="activated" color="light">
+      <ion-card-content>
+        <ion-icon name="pin" color="primary"></ion-icon> {{item.Location}}
+      </ion-card-content>
+      <ion-card-content slot="end">
+        <ion-icon name="person" color="primary"></ion-icon> {{item.Nb_People}} | <ion-icon name="clipboard"
+          color="primary"></ion-icon> {{item.Nb_Proposal}}
+      </ion-card-content>
+    </ion-item>
+  </ion-card>
+  <div *ngIf="myGroups.length == 0" class="empty-list">
+    You don't have a group yet.
+  </div> -->
 </ion-content>
