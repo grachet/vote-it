@@ -5,6 +5,8 @@ export type Vote = {
   anwsers: { [key: string]: boolean };
   thumbUp: number;
   thumbDown: number;
+  isMyVoteUp: boolean;
+  isMyVoteDown: boolean;
 }
 
 export type Votes = { [key: string]: Vote }

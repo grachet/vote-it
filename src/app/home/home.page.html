@@ -27,16 +27,18 @@
       <ion-row>
         <ion-col size="6" class="ion-text-center">
           <ion-button (click)="addUp(vote.id)" fill="clear" class="ion-text-capitalize">
-            <ion-item class="backgroundTransparent">
-              <ion-icon name="thumbs-up-outline" color="primary" slot="start"></ion-icon>
+            <ion-item color="none">
+              <ion-icon *ngIf="vote.isMyVoteUp" name="thumbs-up" color="primary" slot="start"></ion-icon>
+              <ion-icon *ngIf="!vote.isMyVoteUp" name="thumbs-up-outline" color="primary" slot="start"></ion-icon>
               <ion-label color="primary">{{vote.thumbUp}}</ion-label>
             </ion-item>
           </ion-button>
         </ion-col>
         <ion-col size="6" class="ion-text-center">
           <ion-button (click)="addDown(vote.id)" fill="clear" class="ion-text-capitalize">
-            <ion-item class="backgroundTransparent">
-              <ion-icon name="thumbs-down-outline" color="primary" slot="start"></ion-icon>
+            <ion-item color="none">
+              <ion-icon *ngIf="vote.isMyVoteDown" name="thumbs-down" color="primary" slot="start"></ion-icon>
+              <ion-icon *ngIf="!vote.isMyVoteDown" name="thumbs-down-outline" color="primary" slot="start"></ion-icon>
               <ion-label color="primary">{{vote.thumbDown}}</ion-label>
             </ion-item>
           </ion-button>

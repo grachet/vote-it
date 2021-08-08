@@ -31,6 +31,8 @@ export class HomePage {
           answers: e.payload.doc.data()['answers'],
           thumbUp: 5,
           thumbDown: 4,
+          isMyVoteUp: true,
+          isMyVoteDown: false,
         };
       });
     }));;
