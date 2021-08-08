@@ -33,10 +33,13 @@ export class FirebaseService {
     });
   }
 
-  updateVote(index, value) {
+  updateVote(index, isThumbUp) {
+    console.log(isThumbUp)
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
-      this.afs.collection('votes').doc(index).collection('answers').doc(currentUser.uid).set(value)
+      this.afs.collection('votes').doc(index).update({
+        answers: { [currentUser.email]: isThumbUp }
+      })
         .then(
           res => resolve(res),
           err => reject(err)

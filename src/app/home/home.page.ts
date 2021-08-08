@@ -24,11 +24,12 @@ export class HomePage {
     this.firebaseService.getVotes().then(observable => observable.subscribe(data => {
       this.votes = data.map(e => {
         const answers = e.payload.doc.data()['answers'];
+        console.log(answers)
         let thumbUp = 0;
         let thumbDown = 0;
         let isMyVoteUp = false;
         let isMyVoteDown = false;
-        Object.entries(answers).forEach(([user, isUp]) => {
+        Object.entries(answers || {}).forEach(([user, isUp]) => {
           isUp ? thumbUp++ : thumbDown++;
           if (user === authService.userData?.email) {
             isUp ? isMyVoteUp = true : isMyVoteDown = true;
@@ -49,11 +50,11 @@ export class HomePage {
   }
 
   addUp(id: string) {
-    console.log(id)
+    this.firebaseService.updateVote(id, true);
   }
 
   addDown(id: string) {
-    console.log(id)
+    this.firebaseService.updateVote(id, false);
   }
 
   goAddVotePage() {
