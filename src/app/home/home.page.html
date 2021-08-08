@@ -14,36 +14,38 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="form-content">
-  <div class="content">
-    <h1>{{votes}}</h1>
-  </div>
-
-
-
-  <!-- <ion-content *ngIf="items" class="list-mini-content" padding> -->
-  <!-- <ion-text color="primary">
-    <h1>{{votes}}</h1>
-  </ion-text> -->
-
-  <!-- <ion-card *ngFor="let item of myGroups">
-    <ion-item [routerLink]="['/list-proposition/', item.id]" class="activated" color="light">
+<ion-content *ngIf="votes">
+  <ion-card *ngFor="let vote of votes">
+    <ion-item color="light">
       <ion-card-header color="light">
-        <ion-card-title>{{item.Name}}</ion-card-title>
-        <ion-card-subtitle>{{item.Description}}</ion-card-subtitle>
+        <ion-card-title>{{vote.title}}</ion-card-title>
+        <ion-card-subtitle>{{vote.hashtag}}</ion-card-subtitle>
       </ion-card-header>
     </ion-item>
-    <ion-item [routerLink]="['/list-proposition', item.id]" class="activated" color="light">
-      <ion-card-content>
-        <ion-icon name="pin" color="primary"></ion-icon> {{item.Location}}
-      </ion-card-content>
-      <ion-card-content slot="end">
-        <ion-icon name="person" color="primary"></ion-icon> {{item.Nb_People}} | <ion-icon name="clipboard"
-          color="primary"></ion-icon> {{item.Nb_Proposal}}
-      </ion-card-content>
-    </ion-item>
+
+    <ion-footer>
+      <ion-row>
+        <ion-col size="6" class="ion-text-center">
+          <ion-button (click)="addUp(vote.id)" fill="clear" class="ion-text-capitalize">
+            <ion-item class="backgroundTransparent">
+              <ion-icon name="thumbs-up-outline" color="primary" slot="start"></ion-icon>
+              <ion-label color="primary">{{vote.thumbUp}}</ion-label>
+            </ion-item>
+          </ion-button>
+        </ion-col>
+        <ion-col size="6" class="ion-text-center">
+          <ion-button (click)="addDown(vote.id)" fill="clear" class="ion-text-capitalize">
+            <ion-item class="backgroundTransparent">
+              <ion-icon name="thumbs-down-outline" color="primary" slot="start"></ion-icon>
+              <ion-label color="primary">{{vote.thumbDown}}</ion-label>
+            </ion-item>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-footer>
+
   </ion-card>
-  <div *ngIf="myGroups.length == 0" class="empty-list">
-    You don't have a group yet.
-  </div> -->
+  <div *ngIf="votes.length == 0" class="empty-list">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </div>
 </ion-content>

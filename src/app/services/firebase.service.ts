@@ -26,7 +26,7 @@ export class FirebaseService {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.user.subscribe(currentUser => {
         if (currentUser) {
-          this.snapshotChangesSubscription = this.afs.collection('votes').snapshotChanges();
+          this.snapshotChangesSubscription = this.afs.collection('/votes').snapshotChanges();
           resolve(this.snapshotChangesSubscription);
         }
       });
