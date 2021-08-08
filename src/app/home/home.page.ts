@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { Vote } from '../models/vote';
 import { AuthenticationService } from './../services/authentication.service';
@@ -54,7 +55,8 @@ export class HomePage {
   constructor(
     public authService: AuthenticationService,
     public loadingCtrl: LoadingController,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    public router: Router
   ) { }
 
   // ngOnInit() {
@@ -72,5 +74,8 @@ export class HomePage {
   //   return await loading.present();
   // }
 
+  goAddVotePage() {
+    this.router.navigate(['/add-vote']);
+  }
 
 }

@@ -4,7 +4,7 @@
       <ion-searchbar [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)"
         (ionCancel)="onCancel($event)">
       </ion-searchbar>
-      <ion-button (click)="authService.SignOut()" fill="clear">
+      <ion-button (click)="goAddVotePage()" fill="clear">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
       <ion-button (click)="authService.SignOut()" fill="clear">
