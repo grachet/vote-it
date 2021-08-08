@@ -38,7 +38,7 @@ export class FirebaseService {
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
       this.afs.collection('votes').doc(index).update({
-        answers: { [currentUser.email]: isThumbUp }
+        ["answers." + currentUser.uid]: isThumbUp
       })
         .then(
           res => resolve(res),

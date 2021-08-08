@@ -29,9 +29,9 @@ export class HomePage {
         let thumbDown = 0;
         let isMyVoteUp = false;
         let isMyVoteDown = false;
-        Object.entries(answers || {}).forEach(([user, isUp]) => {
+        Object.entries(answers || {}).forEach(([uid, isUp]) => {
           isUp ? thumbUp++ : thumbDown++;
-          if (user === authService.userData?.email) {
+          if (uid === authService.userData?.uid) {
             isUp ? isMyVoteUp = true : isMyVoteDown = true;
           }
         })
