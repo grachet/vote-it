@@ -22,17 +22,27 @@ export class HomePage {
     public router: Router
   ) {
     this.firebaseService.getVotes().then(observable => observable.subscribe(data => {
-      console.log(data)
       this.votes = data.map(e => {
+        const answers = e.payload.doc.data()['answers'];
+        let thumbUp = 0;
+        let thumbDown = 0;
+        let isMyVoteUp = false;
+        let isMyVoteDown = false;
+        Object.entries(answers).forEach(([user, isUp]) => {
+          isUp ? thumbUp++ : thumbDown++;
+          if (user === authService.userData?.email) {
+            isUp ? isMyVoteUp = true : isMyVoteDown = true;
+          }
+        })
         return {
           id: e.payload.doc.id,
           title: e.payload.doc.data()['title'],
           hashtag: e.payload.doc.data()['hashtag'],
-          answers: e.payload.doc.data()['answers'],
-          thumbUp: 5,
-          thumbDown: 4,
-          isMyVoteUp: true,
-          isMyVoteDown: false,
+          answers,
+          thumbUp,
+          thumbDown,
+          isMyVoteUp,
+          isMyVoteDown,
         };
       });
     }));;
