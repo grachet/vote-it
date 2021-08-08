@@ -70,7 +70,7 @@ export class AuthenticationService {
   // Returns true when user's email is verified
   get isEmailVerified(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return (user.emailVerified !== false) ? true : false;
+    return (user?.emailVerified !== false) ? true : false;
   }
 
   // Sign in with Gmail

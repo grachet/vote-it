@@ -31,6 +31,7 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.validations_form = this.formBuilder.group({
       email: new FormControl('guillaume.rachet@gmail.com', Validators.compose([
         Validators.required,
