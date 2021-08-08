@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { observable, Observable } from 'rxjs';
 import { Vote } from '../models/vote';
 import { AuthenticationService } from './../services/authentication.service';
 import { FirebaseService } from './../services/firebase.service';
@@ -13,6 +11,8 @@ import { FirebaseService } from './../services/firebase.service';
 })
 export class HomePage {
 
+  indexToId: { [key: number]: string } = {};
+  filterTerm: string;
   votes: Array<Vote> = [];
 
   constructor(
@@ -22,9 +22,9 @@ export class HomePage {
     public router: Router
   ) {
     this.firebaseService.getVotes().then(observable => observable.subscribe(data => {
-      this.votes = data.map(e => {
+      this.votes = data.map((e: any, i: number) => {
         const answers = e.payload.doc.data()['answers'];
-        console.log(answers)
+        this.indexToId[i] = e.payload.doc.id;
         let thumbUp = 0;
         let thumbDown = 0;
         let isMyVoteUp = false;
@@ -36,10 +36,9 @@ export class HomePage {
           }
         })
         return {
-          id: e.payload.doc.id,
           title: e.payload.doc.data()['title'],
           hashtag: e.payload.doc.data()['hashtag'],
-          answers,
+          index: i,
           thumbUp,
           thumbDown,
           isMyVoteUp,
@@ -49,12 +48,12 @@ export class HomePage {
     }));;
   }
 
-  addUp(id: string) {
-    this.firebaseService.updateVote(id, true);
+  addUp(index: number) {
+    this.firebaseService.updateVote(this.indexToId[index], true);
   }
 
-  addDown(id: string) {
-    this.firebaseService.updateVote(id, false);
+  addDown(index: number) {
+    this.firebaseService.updateVote(this.indexToId[index], false);
   }
 
   goAddVotePage() {

@@ -1,8 +1,8 @@
 export type Vote = {
-  id: string;
+  index: number;
   title: string;
   hashtag: string;
-  anwsers: { [key: string]: boolean };
+  // anwsers: { [key: string]: boolean };
   thumbUp: number;
   thumbDown: number;
   isMyVoteUp: boolean;

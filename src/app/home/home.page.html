@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons end>
-      <ion-searchbar [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)"
+      <ion-searchbar [(ngModel)]="filterTerm" [showCancelButton]="shouldShowCancel" animated="true"
         (ionCancel)="onCancel($event)">
       </ion-searchbar>
       <ion-button (click)="goAddVotePage()" fill="clear">
@@ -15,7 +15,7 @@
 </ion-header>
 
 <ion-content *ngIf="votes">
-  <ion-card *ngFor="let vote of votes">
+  <ion-card *ngFor="let vote of votes | filter:filterTerm">
     <ion-item color="light">
       <ion-card-header color="light">
         <ion-card-title>{{vote.title}}</ion-card-title>
@@ -26,7 +26,7 @@
     <ion-footer>
       <ion-row>
         <ion-col size="6" class="ion-text-center">
-          <ion-button (click)="addUp(vote.id)" fill="clear" class="ion-text-capitalize">
+          <ion-button (click)="addUp(vote.index)" fill="clear" class="ion-text-capitalize">
             <ion-item color="none">
               <ion-icon *ngIf="vote.isMyVoteUp" name="thumbs-up" color="primary" slot="start"></ion-icon>
               <ion-icon *ngIf="!vote.isMyVoteUp" name="thumbs-up-outline" color="primary" slot="start"></ion-icon>
@@ -35,7 +35,7 @@
           </ion-button>
         </ion-col>
         <ion-col size="6" class="ion-text-center">
-          <ion-button (click)="addDown(vote.id)" fill="clear" class="ion-text-capitalize">
+          <ion-button (click)="addDown(vote.index)" fill="clear" class="ion-text-capitalize">
             <ion-item color="none">
               <ion-icon *ngIf="vote.isMyVoteDown" name="thumbs-down" color="primary" slot="start"></ion-icon>
               <ion-icon *ngIf="!vote.isMyVoteDown" name="thumbs-down-outline" color="primary" slot="start"></ion-icon>
