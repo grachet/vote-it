@@ -52,6 +52,7 @@ export class FirebaseService {
       this.afs.collection('/votes').add({
         title: value.title,
         hashtag: value.hashtag,
+        timestamp: Date.now(),
         answers: {}
       })
         .then(
