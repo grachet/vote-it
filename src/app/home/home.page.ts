@@ -22,9 +22,9 @@ export class HomePage {
     public router: Router
   ) {
     this.firebaseService.getVotes().then(observable => observable.subscribe(data => {
-      this.votes = data
+      data
         .sort((a: any, b: any) => b.payload.doc.data()['timestamp'] - a.payload.doc.data()['timestamp'])
-        .map((e: any, i: number) => {
+        .forEach((e: any, i: number) => {
           const answers = e.payload.doc.data()['answers'];
           this.indexToId[i] = e.payload.doc.id;
           let thumbUp = 0;
@@ -37,15 +37,24 @@ export class HomePage {
               isUp ? isMyVoteUp = true : isMyVoteDown = true;
             }
           })
-          return {
-            title: e.payload.doc.data()['title'],
-            hashtag: e.payload.doc.data()['hashtag'],
-            index: i,
-            thumbUp,
-            thumbDown,
-            isMyVoteUp,
-            isMyVoteDown,
-          };
+          if (this.votes[i]) {
+            this.votes[i].title = e.payload.doc.data()['title'];
+            this.votes[i].hashtag = e.payload.doc.data()['hashtag'];
+            this.votes[i].thumbUp = thumbUp;
+            this.votes[i].thumbDown = thumbDown;
+            this.votes[i].isMyVoteUp = isMyVoteUp;
+            this.votes[i].isMyVoteDown = isMyVoteDown;
+          } else {
+            this.votes[i] = {
+              title: e.payload.doc.data()['title'],
+              hashtag: e.payload.doc.data()['hashtag'],
+              index: i,
+              thumbUp,
+              thumbDown,
+              isMyVoteUp,
+              isMyVoteDown,
+            }
+          }
         });
     }));;
   }
